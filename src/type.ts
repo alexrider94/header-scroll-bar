@@ -7,3 +7,9 @@ export type HeaderType = {
   height: number;
   children: ReactNode;
 };
+
+export enum ScrollType {
+  up,
+  down,
+  hold
+}

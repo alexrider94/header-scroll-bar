@@ -1,22 +1,29 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 import {
   GestureResponderEvent,
   PanResponder,
   PanResponderGestureState,
-  View
-} from "react-native";
-import { HeaderType, ScrollType } from "./type";
+  View,
+} from 'react-native';
+import { HeaderType, ScrollType } from './type';
 
 export default (props: HeaderType) => {
+  /*
+  scroll type
+  0 - up
+  1 - down
+  2 - hold
+  */
   const [scrollType, setScrollType] =
-    useState<ScrollType>();
+    useState<ScrollType>(2);
 
   const onMoveHandler = (
-    event: GestureResponderEvent,
-    gestureState: PanResponderGestureState
+    _event: GestureResponderEvent,
+    gestureState: PanResponderGestureState,
   ) => {
     const moveStartY = gestureState.dy;
     if (moveStartY > 0) {
+      setScrollType(0);
     }
   };
 
@@ -24,7 +31,7 @@ export default (props: HeaderType) => {
     onMoveShouldSetPanResponder: () => true,
     onMoveShouldSetPanResponderCapture: () => true,
     onPanResponderGrant: () => {},
-    onPanResponderMove: onMoveHandler
+    onPanResponderMove: onMoveHandler,
   });
 
   return (

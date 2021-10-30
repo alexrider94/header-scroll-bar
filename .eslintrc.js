@@ -15,10 +15,8 @@ module.exports = {
   ignorePatterns: ['node_modules/'],
   plugins: ['react', '@typescript-eslint', 'prettier'],
   rules: {
-    'import/no-unresolved': [
-      'error',
-      { caseSensitive: false },
-    ],
+    'import/no-unresolved': ['error', { caseSensitive: false }],
+    'linebreak-style': 0,
     'import/prefer-default-export': 'off',
     'import/extensions': [
       'error',
@@ -30,5 +28,15 @@ module.exports = {
         tsx: 'never',
       },
     ],
+    'react/jsx-filename-extension': [1, { extensions: ['.tsx'] }],
+    'react/jsx-props-no-spreading': 'off',
+  },
+  settings: {
+    'import/resolver': {
+      node: {
+        extensions: ['.js', '.jsx', '.ts', '.tsx'],
+        moduleDirectory: ['node_modules', 'src/'],
+      },
+    },
   },
 };

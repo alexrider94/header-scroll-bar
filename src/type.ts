@@ -1,4 +1,5 @@
-import { ReactNode } from "react";
+/* eslint-disable no-unused-vars */
+import { ReactNode } from 'react';
 
 export type HeaderType = {
   width: number;
@@ -8,8 +9,9 @@ export type HeaderType = {
   children: ReactNode;
 };
 
+// eslint-disable-next-line no-shadow
 export enum ScrollType {
-  up,
-  down,
-  hold
+  Up = 0,
+  Down,
+  Hold,
 }

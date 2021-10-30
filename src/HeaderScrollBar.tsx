@@ -7,15 +7,14 @@ import {
 } from 'react-native';
 import { HeaderType, ScrollType } from './type';
 
-export default (props: HeaderType) => {
+export default ({ children }: HeaderType) => {
   /*
   scroll type
   0 - up
   1 - down
   2 - hold
   */
-  const [scrollType, setScrollType] =
-    useState<ScrollType>(2);
+  const [scrollType, setScrollType] = useState<ScrollType>(2);
 
   const onMoveHandler = (
     _event: GestureResponderEvent,
@@ -24,6 +23,8 @@ export default (props: HeaderType) => {
     const moveStartY = gestureState.dy;
     if (moveStartY > 0) {
       setScrollType(0);
+    } else if (moveStartY < 0) {
+      setScrollType(1);
     }
   };
 
@@ -34,9 +35,5 @@ export default (props: HeaderType) => {
     onPanResponderMove: onMoveHandler,
   });
 
-  return (
-    <View {...panResponder.panHandlers}>
-      {props.children}
-    </View>
-  );
+  return <View {...panResponder.panHandlers}>{children}</View>;
 };

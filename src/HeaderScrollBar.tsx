@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import {
   GestureResponderEvent,
   PanResponder,
@@ -17,18 +17,18 @@ function HeaderScrollBar({
   isRepeatable,
   time,
 }: HeaderType) {
-  const [scrollType, setScrollType] = useState<ScrollType>(2);
   const [event, setEvent] = useInterval(time, isRepeatable);
+  const headerRef = useRef<View | null>(null);
 
   const onMoveHandler = (
     _event: GestureResponderEvent,
     gestureState: PanResponderGestureState,
   ) => {
-    const moveStartY = gestureState.dy;
-    if (moveStartY > 0) {
-      setScrollType(0);
-    } else if (moveStartY < 0) {
-      setScrollType(1);
+    const { dy } = gestureState;
+    console.log(dy);
+    if (dy > 0) {
+    } else if (dy < 0) {
+    } else {
     }
   };
 
@@ -45,24 +45,49 @@ function HeaderScrollBar({
       position: 'absolute',
       width: '100%',
       height,
+      backgroundColor: '#f05959',
     },
     topPosition: {
       top: 0,
+      borderBottomRightRadius: 15,
+      borderBottomLeftRadius: 15,
     },
     bottomPosition: {
       bottom: 0,
+      borderTopRightRadius: 15,
+      borderTopLeftRadius: 15,
+    },
+    bar: {
+      position: 'absolute',
+      backgroundColor: '#797979',
+      width: '80%',
+      height: 8,
+      borderRadius: 30,
+      alignSelf: 'center',
+    },
+    barTopPos: {
+      top: height - 20,
+    },
+    barBottomPos: {
+      bottom: height,
     },
   });
 
   return visible ? (
     <View
+      ref={headerRef}
       style={[
         styles.header,
         scrollPosition === 'top' ? styles.topPosition : styles.bottomPosition,
       ]}
-      {...panResponder.panHandlers}
     >
+      {scrollPosition === 'bottom' && (
+        <View style={[styles.bar, styles.barBottomPos]} {...panResponder.panHandlers} />
+      )}
       {children}
+      {scrollPosition === 'top' && (
+        <View style={[styles.bar, styles.barTopPos]} {...panResponder.panHandlers} />
+      )}
     </View>
   ) : null;
 }

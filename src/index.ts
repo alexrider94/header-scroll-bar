@@ -1,1 +1,1 @@
-export { default as HeaderScrollBar } from './HeaderScrollBar';
+export { default } from './HeaderScrollBar';

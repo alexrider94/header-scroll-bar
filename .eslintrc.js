@@ -15,6 +15,7 @@ module.exports = {
   ignorePatterns: ['node_modules/'],
   plugins: ['react', '@typescript-eslint', 'prettier'],
   rules: {
+    'no-use-before-define': 'off',
     'import/no-unresolved': ['error', { caseSensitive: false }],
     'linebreak-style': 0,
     'import/prefer-default-export': 'off',

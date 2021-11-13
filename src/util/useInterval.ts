@@ -1,7 +1,9 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from "react";
 
 export default (delay: number, repeat: boolean) => {
-  const [event, setEvent] = useState<(() => void) | null>(null);
+  const [event, setEvent] = useState<(() => void) | null>(
+    null
+  );
 
   useEffect(() => {
     if (event) {
@@ -9,7 +11,6 @@ export default (delay: number, repeat: boolean) => {
 
       return () => clearTimeout(timeEvt);
     }
-    return () => null;
   }, [repeat, event]);
 
   return [event, setEvent];

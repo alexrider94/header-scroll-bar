@@ -15,3 +15,8 @@ export enum ScrollType {
   Down,
   Hold,
 }
+
+export interface HeaderScrollBar {
+  headerType: HeaderType;
+  scrollType: ScrollType;
+}
